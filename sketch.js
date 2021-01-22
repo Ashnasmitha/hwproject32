@@ -9,10 +9,10 @@ var world,engine,ground,ground1,block1,block2,block3,block4,block5,block6,block7
 var block13,block14,block15,block16,block17,block18;
 var block19,block20,block21,block22,block23,block24,block25;
 var polygon,slingShot,base;
-var score=0;
+var score=0,backgroundImg;
 
 function preload() {
-
+  defaultbg = loadImage("bg1.jpg");
   getBackgroundImg();
 }
 
@@ -75,12 +75,12 @@ function setup() {
 
 
 function draw() {
-  if(background(240,220,226)){
+if(backgroundImg){
 
-    background(240,220,226);
+    background(backgroundImg);
 }
 else{
-    background(56,44,44);
+    background(defaultbg);
 }
 
   rectMode(CENTER);
@@ -152,7 +152,7 @@ else{
   block24.score();
 
   textSize(25);
-  fill("blue");
+  fill("dodgerblue");
   text("Drag The Hexagonal Stone and Release it to launch it towards the block",30,50);
   text("SCORE :"+score,20,480);
   
@@ -179,15 +179,15 @@ function keyPressed(){
 async function getBackgroundImg(){
   var response=await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
   var responseJSON=await response.json();
-  console.log(responseJSON);
   var datetime=responseJSON.datetime;
   var hour = datetime.slice(11,13);
   if(hour>=06 && hour<=18){
-      background(240,220,226)
+      bg= "bg1.jpg";
   }
   else{
-      background(56,44,44)
+      bg= "bg2.jpg";
   }
+  backgroundImg=loadImage(bg);
 }
 
 
